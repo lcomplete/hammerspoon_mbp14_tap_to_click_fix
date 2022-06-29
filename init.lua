@@ -3,6 +3,8 @@ local isCmdPress = false
 local stationaryCount = 0 -- 触摸板上静止不动的事件数量
 local trackpadEventCount = 0 -- 触摸板上发生的事件数量
 local cmdtapTimer = nil
+local isCmdTapFixing = false
+local isTapAfterCmdPress = false
 
 function flagsListener(e)
   isCmdPress = false	
@@ -32,6 +34,7 @@ function tapListener(e)
   if isCmdPress == false then
     trackpadEventCount = 0
     stationaryCount = 0
+    isTapAfterCmdPress = false
     return
   end
 
@@ -52,10 +55,11 @@ function tapListener(e)
   elseif touch.phase == "began" then
     stationaryCount = 0
     trackpadEventCount = 0
+    isTapAfterCmdPress = true
   elseif touch.phase == "ended" then
     -- print("trackpadEventCount: " .. trackpadEventCount)
     -- 一次 tap to click 总的事件一般不会超过 10 个，其中静止事件一般大于 2 个，按住 cmd 时，可能小于 2 个
-    if isCmdPress and trackpadEventCount<10 and stationaryCount>=1 then
+    if isCmdPress and isTapAfterCmdPress and isCmdTapFixing == false and trackpadEventCount<10 and stationaryCount>=1 then
       -- print('tap to click fixing')
       resetTimer()
       cmdtapTimer = hs.timer.doAfter(0.1, function()
@@ -63,6 +67,13 @@ function tapListener(e)
         local pos = hs.mouse.absolutePosition()
         evt.newMouseEvent(evt.types.leftMouseDown, pos,{'cmd'}):post()
         evt.newMouseEvent(evt.types.leftMouseUp, pos,{'cmd'}):post()
+      end)
+
+      isTapAfterCmdPress = false
+      -- 控制间隔时间 避免重复触发
+      isCmdTapFixing = true
+      hs.timer.doAfter(0.3, function()
+        isCmdTapFixing = false
       end)
     end
     stationaryCount = 0
