@@ -72,7 +72,7 @@ function tapListener(e)
       isTapAfterCmdPress = false
       -- 控制间隔时间 避免重复触发
       isCmdTapFixing = true
-      hs.timer.doAfter(0.3, function()
+      hs.timer.doAfter(0.35, function()
         isCmdTapFixing = false
       end)
     end
