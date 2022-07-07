@@ -10,3 +10,5 @@ issue detail:
 - install hammerspoon
 - click 「Open Config」 menu
 - copy the code in init.lua to config
+- copy the `Spoons` directory inside to `.hammerspoon`
+- Reload Config
