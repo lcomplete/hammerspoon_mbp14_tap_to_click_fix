@@ -12,3 +12,7 @@ issue detail:
 - copy the code in init.lua to config
 - move the `Spoons` directory to `.hammerspoon`
 - Reload Config
+
+# Known issues
+
+- Hammerspoon can't receive `getTouches()` event data after a while, should restart hammerspoon to make it work again.
