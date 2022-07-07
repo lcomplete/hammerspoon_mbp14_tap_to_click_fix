@@ -15,4 +15,4 @@ issue detail:
 
 # Known issues
 
-- Hammerspoon can't receive `getTouches()` event data after a while, should restart hammerspoon to make it work again.
+- Hammerspoon `0.9.97` can't receive `getTouches()` event data after a while, should restart hammerspoon to make it work again.
