@@ -1,5 +1,11 @@
 # fix macbook pro 14 command + tap issue
 
+# update
+
+monterey 12.5 had fixed this issue.
+
+---
+
 issue detail:
 
 - [Tap-to-click issues on B9 and 10 (and now Monterey release)](https://forums.macrumors.com/threads/tap-to-click-issues-on-b9-and-10-and-now-monterey-release.2317279/)
